@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.syux": "syux",
+    "*.sx": "syux"
+  }
+}

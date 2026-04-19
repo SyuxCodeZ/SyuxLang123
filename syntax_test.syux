@@ -1,0 +1,126 @@
+# Syux Syntax Highlighting Test
+# This file tests all syntax features
+
+# === Variables ===
+val num = 42
+val flt = 3.14
+val str = "Hello World"
+val flag = true
+val flag2 = false
+val onFlag = on
+val offFlag = off
+
+set num = 100
+
+# === Arrays ===
+val arr = [1, 2, 3, 4, 5]
+val empty = []
+
+# === Math Operations ===
+val sum = 10 + 20
+val diff = 50 - 25
+val prod = 6 * 7
+val quot = 100 / 4
+val mod = 17 % 5
+val neg = -10
+val eq = 5 == 5
+val neq = 5 != 3
+val gt = 10 > 5
+val lt = 3 < 8
+val gte = 5 >= 5
+val lte = 4 <= 4
+
+# === Functions ===
+func add(a, b) [
+    return a + b
+]
+
+func greet(name) [
+    comp.out "Hello, " + name
+]
+
+func noReturn(x) [
+    val result = x * 2
+]
+
+# === Control Flow ===
+if (flag) [
+    comp.out "Flag is true"
+]
+
+if (num > 50) [
+    comp.out "Big number"
+] else [
+    comp.out "Small number"
+]
+
+while (num > 0) [
+    set num = num - 1
+]
+
+for {val i = 0 : i < 5 : i = i + 1} [
+    comp.out i
+]
+
+# === Classes ===
+class User [
+    val name
+    val age
+
+    ctor(n, a) [
+        set name = n
+        set age = a
+    ]
+
+    dtor [
+        comp.out "Goodbye"
+    ]
+
+    func getName() [
+        return name
+    ]
+]
+
+# === Method Calls ===
+val u = User("Alice", 25)
+val userName = u.getName()
+val arrLen = arr.len
+
+# === String Methods ===
+val trimmed = str.trim()
+val upper = str.toUpper()
+val lower = str.toLower()
+
+# === Math Library ===
+add library STL
+
+func testMath() [
+    comp.out math.abs(-5)
+    comp.out math.round(3.7)
+    comp.out math.max(10, 20)
+    comp.out math.min(10, 20)
+    comp.out math.pow(2, 3)
+    comp.out math.sqrt(16)
+    comp.out math.random()
+]
+
+# === Console ===
+console.log("Info message")
+console.warn("Warning message")
+console.error("Error message")
+
+# === Return ===
+func getValue() [
+    if (true) [
+        return 42
+    ]
+    return 0
+]
+
+# === Main ===
+void.main [
+    greet("World")
+    val result = add(5, 10)
+    comp.out result
+    comp.out arr.len
+]

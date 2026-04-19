@@ -1,0 +1,11 @@
+{
+  "iconDefinitions": {
+    "syux-icon": {
+      "iconPath": "icon.png"
+    }
+  },
+  "fileExtensions": {
+    "syux": "syux-icon",
+    "sx": "syux-icon"
+  }
+}

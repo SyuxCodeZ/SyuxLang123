@@ -1,0 +1,4 @@
+void.main [
+    val x = 10
+    comp.out x
+]

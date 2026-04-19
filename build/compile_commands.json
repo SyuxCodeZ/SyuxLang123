@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/HP/OneDrive/Desktop/syux/build",
+  "command": "\"D:\\gcc msys2\\ucrt64\\bin\\g++.exe\"  @CMakeFiles/syux.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\syux.dir\\src\\main.cpp.obj -c C:\\Users\\HP\\OneDrive\\Desktop\\syux\\src\\main.cpp",
+  "file": "C:/Users/HP/OneDrive/Desktop/syux/src/main.cpp",
+  "output": "CMakeFiles/syux.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/HP/OneDrive/Desktop/syux/build",
+  "command": "\"D:\\gcc msys2\\ucrt64\\bin\\g++.exe\"  @CMakeFiles/syux.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\syux.dir\\src\\parser.cpp.obj -c C:\\Users\\HP\\OneDrive\\Desktop\\syux\\src\\parser.cpp",
+  "file": "C:/Users/HP/OneDrive/Desktop/syux/src/parser.cpp",
+  "output": "CMakeFiles/syux.dir/src/parser.cpp.obj"
+},
+{
+  "directory": "C:/Users/HP/OneDrive/Desktop/syux/build",
+  "command": "\"D:\\gcc msys2\\ucrt64\\bin\\g++.exe\"  @CMakeFiles/syux.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\syux.dir\\src\\scanner.cpp.obj -c C:\\Users\\HP\\OneDrive\\Desktop\\syux\\src\\scanner.cpp",
+  "file": "C:/Users/HP/OneDrive/Desktop/syux/src/scanner.cpp",
+  "output": "CMakeFiles/syux.dir/src/scanner.cpp.obj"
+},
+{
+  "directory": "C:/Users/HP/OneDrive/Desktop/syux/build",
+  "command": "\"D:\\gcc msys2\\ucrt64\\bin\\g++.exe\"  @CMakeFiles/syux.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\syux.dir\\src\\codegen.cpp.obj -c C:\\Users\\HP\\OneDrive\\Desktop\\syux\\src\\codegen.cpp",
+  "file": "C:/Users/HP/OneDrive/Desktop/syux/src/codegen.cpp",
+  "output": "CMakeFiles/syux.dir/src/codegen.cpp.obj"
+}
+]

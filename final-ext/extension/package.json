@@ -1,0 +1,76 @@
+{
+  "name": "syux-language",
+  "displayName": "SyuxLang",
+  "description": "Syux programming language - a statically-typed language that transpiles to C++",
+  "version": "1.0.0",
+  "author": "Sid",
+  "publisher": "Sid",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "icon": "images/icon.png",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "syux",
+        "aliases": ["Syux", "syux"],
+        "extensions": [".syux", ".sx"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "syux",
+        "scopeName": "source.syux",
+        "path": "./syntaxes/syux.tmLanguage.json"
+      }
+    ],
+    "tasks": {
+      "version": "2.0.0",
+      "tasks": [
+        {
+          "type": "shell",
+          "label": "Syux: Run",
+          "command": "syux",
+          "args": ["${file}"],
+          "problemMatcher": [
+            {
+              "owner": "syux",
+              "fileLocation": "relative",
+              "pattern": {
+                "regexp": "^\\[Syux Error\\] (.+)$",
+                "message": 1
+              },
+              "severity": "error"
+            }
+          ],
+          "group": {
+            "kind": "test",
+            "isDefault": true
+          }
+        },
+        {
+          "type": "shell",
+          "label": "Syux: Build",
+          "command": "syux",
+          "args": ["build", "${file}"],
+          "problemMatcher": [
+            {
+              "owner": "syux",
+              "fileLocation": "relative",
+              "pattern": {
+                "regexp": "^\\[Syux Error\\] (.+)$",
+                "message": 1
+              },
+              "severity": "error"
+            }
+          ],
+          "group": "build"
+        }
+      ]
+    }
+  }
+}

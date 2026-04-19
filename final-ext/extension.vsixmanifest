@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "extensions": [
+    {
+      "id": "syux-language",
+      "version": "1.0.0"
+    }
+  ]
+}

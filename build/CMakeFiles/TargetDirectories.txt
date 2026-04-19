@@ -1,0 +1,3 @@
+D:/SyuxLang/build/CMakeFiles/syux.dir
+D:/SyuxLang/build/CMakeFiles/ALL_BUILD.dir
+D:/SyuxLang/build/CMakeFiles/ZERO_CHECK.dir

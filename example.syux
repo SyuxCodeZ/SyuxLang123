@@ -1,0 +1,41 @@
+# Syux Full Feature Demo (Compact)
+
+class User [
+    val name
+    val age
+
+    ctor(n, a) [
+        set name = n
+        set age = a
+        comp.out "User created"
+    ]
+
+    dtor [
+        comp.out "User destroyed"
+    ]
+
+    func greet() [
+        comp.out "Hello,"
+        comp.out name
+    ]
+]
+
+void.main [
+    val active = on
+    val count = 2
+
+    val u = User("Sid", 12)
+
+    if (active) [
+        u.greet()
+    ] else [
+        comp.out "Inactive"
+    ]
+
+    for {val i = 0 : i < count : i++} [
+        comp.out i
+    ]
+
+    val nums = [5, 10, 15]
+    comp.out nums.len
+]

@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.syux": "syux"
+  },
+  "code-runner.executorMapByFileExtension": {
+    ".syux": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$workspaceRoot\\\\scripts\\\\run_syux.ps1\" -SourceFile \"$fileName\""
+  },
+  "workbench.editor.autoLockGroups": {
+    "workbench.editor.cascadeEditor": true
+  }
+}

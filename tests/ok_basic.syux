@@ -1,0 +1,9 @@
+func add(a, b) [
+  return a + b
+]
+
+void.main [
+  val x = 5
+  val y = add(x, 4)
+  comp.out y
+]

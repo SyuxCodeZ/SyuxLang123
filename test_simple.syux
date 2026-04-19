@@ -1,0 +1,10 @@
+# Syntax Highlighting Test
+
+# === Functions ===
+func add(a, b) [
+    return a + b
+]
+
+void.main [
+    comp.out "test"
+]

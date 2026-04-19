@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Syux",
+  "scopeName": "source.syux",
+  "patterns": [
+    {"include": "#strings"},
+    {"include": "#comments"},
+    {"include": "#keywords"},
+    {"include": "#keywords2"},
+    {"include": "#builtins"},
+    {"include": "#functions"},
+    {"include": "#classNames"},
+    {"include": "#types"},
+    {"include": "#booleans"},
+    {"include": "#numbers"},
+    {"include": "#methods"},
+    {"include": "#properties"}
+  ],
+  "repository": {
+    "strings": {
+      "name": "string.quoted.double.syux",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {"name": "constant.character.escape.syux", "match": "\\\\."},
+        {"name": "invalid.illegal", "match": "\n"}
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {"name": "comment.line.number-sign.syux", "match": "#.*$"},
+        {"name": "comment.block.syux", "begin": "#/", "end": "/#"}
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {"name": "keyword.control.syux", "match": "\\b(if|else)\\b"},
+        {"name": "keyword.loop.syux", "match": "\\b(while|for|do)\\b"},
+        {"name": "keyword.return.syux", "match": "\\breturn\\b"}
+      ]
+    },
+    "keywords2": {
+      "patterns": [
+        {"name": "keyword.declaration.syux", "match": "\\b(val|set|func|class|struct|add|use|import|vtor)\\b"},
+        {"name": "keyword.type.syux", "match": "\\b(void|ctor|dtor)\\b"}
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {"name": "support.function.syux", "match": "\\b(comp\\.(out|in))\\b"},
+        {"name": "support.library.syux", "match": "\\b(math|console|json|file)\\b"}
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {"name": "entity.name.function.syux", "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\()"}
+      ]
+    },
+    "classNames": {
+      "patterns": [
+        {"name": "entity.name.type.class.syux", "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"}
+      ]
+    },
+    "types": {
+      "patterns": [
+        {"name": "storage.type.syux", "match": "\\b(int|float|string|bool)\\b"}
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {"name": "constant.language.boolean.syux", "match": "\\b(true|false|on|off)\\b"}
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {"name": "constant.numeric.syux", "match": "\\b[0-9]+(\\.[0-9]+)?\\b"}
+      ]
+    },
+    "methods": {
+      "patterns": [
+        {"name": "support.function.method.syux", "match": "\\.[a-zA-Z_][a-zA-Z0-9_]*(?=\\()" }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {"name": "variable.other.property.syux", "match": "\\.[a-zA-Z_][a-zA-Z0-9_]*"}
+      ]
+    }
+  }
+}

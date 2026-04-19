@@ -1,0 +1,44 @@
+# Simple 4-Function Calculator in Syux V12
+
+func add(a, b) [ return a + b ]
+func sub(a, b) [ return a - b ]
+func mul(a, b) [ return a * b ]
+func divide(a, b) [ 
+    if (b == 0) [
+        comp.out "Error: Division by zero!"
+        return 0
+    ]
+    return a / b 
+]
+
+void.main [
+    val running = true
+    val choice = 0
+    
+    comp.out "=== Syux Calc V1.0 ==="
+    
+    while (running) [
+        comp.out ""
+        comp.out "1. Add  2. Sub  3. Mul  4. Div  5. Exit"
+        comp.out "Select an option:"
+        comp.in choice
+        
+        if (choice == 5) [
+            set running = false
+            comp.out "Goodbye!"
+        ] else [
+            val n1 = 0
+            val n2 = 0
+            
+            comp.out "Enter first number:"
+            comp.in n1
+            comp.out "Enter second number:"
+            comp.in n2
+            
+            if (choice == 1) [ comp.out add(n1, n2) ]
+            if (choice == 2) [ comp.out sub(n1, n2) ]
+            if (choice == 3) [ comp.out mul(n1, n2) ]
+            if (choice == 4) [ comp.out divide(n1, n2) ]
+        ]
+    ]
+]
