@@ -1,5 +1,0 @@
-val x = 10
-
-void.main [
-    comp.out x
-]

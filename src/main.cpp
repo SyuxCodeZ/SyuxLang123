@@ -34,7 +34,7 @@ void logError(const std::string& msg) {
 }
 
 void printUsage() {
-  std::cout << "Syux Compiler v0.5.0\n\n";
+  std::cout << "Syux Compiler v0.7.1\n";
   std::cout << "Usage:\n";
   std::cout << "  syux <file.syux>        Run Syux file from anywhere\n";
   std::cout << "  syux run <file.syux>    Run Syux file\n";
@@ -200,7 +200,7 @@ int compileOutput(const std::filesystem::path& workDir) {
   outExe += ".exe";
 #endif
   std::string compiler = findCompiler();
-  std::string cmd = compiler + " -std=c++20 \"" + outCpp.string() + "\" -o \"" + outExe + "\"";
+  std::string cmd = compiler + " -std=c++20 \"" + outCpp.string() + "\" -o \"" + outExe + "\" -lcrypto -lssl";
   return std::system(cmd.c_str());
 }
 
@@ -221,7 +221,7 @@ int main(int argc, char** argv){
   }
 
   if (std::string(argv[1]) == "--version" || std::string(argv[1]) == "-v") {
-    std::cout << "Syux Compiler v0.5.0\n";
+    std::cout << "Syux Compiler v0.7.1\n";
     std::cout << "Transpiles Syux to C++20\n";
     return 0;
   }

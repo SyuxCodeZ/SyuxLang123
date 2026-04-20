@@ -1,22 +1,20 @@
-# Syux Full Feature Demo (Compact)
-
 class User [
-    val name
-    val age
+    val name = ""
+    val age = 0
 
     ctor(n, a) [
-        set name = n
-        set age = a
+        set self.name = n
+        set self.age = a
         comp.out "User created"
     ]
 
-    dtor [
+    dtor ()[
         comp.out "User destroyed"
     ]
 
     func greet() [
         comp.out "Hello,"
-        comp.out name
+        comp.out self.name
     ]
 ]
 

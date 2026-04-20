@@ -57,6 +57,11 @@ struct MethodCallNode : ExprNode {
   std::vector<std::unique_ptr<ExprNode>> args;
 };
 
+struct LambdaNode : ExprNode {
+  std::string param;
+  std::unique_ptr<ExprNode> body;
+};
+
 struct StmtNode : Node {
   virtual ~StmtNode() = default;
 };
@@ -117,6 +122,14 @@ struct IfNode : StmtNode {
   std::unique_ptr<ExprNode> condition;
   std::unique_ptr<BlockNode> thenBlock;
   std::unique_ptr<BlockNode> elseBlock;
+  std::unique_ptr<StmtNode> elseIfStmt;
+};
+
+struct SwitchNode : StmtNode {
+  std::unique_ptr<ExprNode> expr;
+  std::vector<std::unique_ptr<ExprNode>> caseValues;
+  std::vector<std::unique_ptr<BlockNode>> caseBlocks;
+  std::unique_ptr<BlockNode> defaultBlock;
 };
 
 struct ReturnNode : StmtNode {

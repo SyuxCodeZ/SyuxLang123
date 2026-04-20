@@ -189,6 +189,62 @@ if (src.compare(pos, 7, "library") == 0 &&
       continue;
     }
 
+    if (src.compare(pos, 4, "else") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 4 >= src.size() || !isIdentChar(src[pos + 4]))) {
+      pushToken(TokenType::Else, "else");
+      pos += 4;
+      continue;
+    }
+
+    if (src.compare(pos, 2, "if") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 2 >= src.size() || !isIdentChar(src[pos + 2]))) {
+      pushToken(TokenType::If, "if");
+      pos += 2;
+      continue;
+    }
+
+    if (src.compare(pos, 4, "else") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 4 >= src.size() || !isIdentChar(src[pos + 4]))) {
+      pushToken(TokenType::Else, "else");
+      pos += 4;
+      continue;
+    }
+
+    if (src.compare(pos, 7, "else if") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 7 >= src.size() || !isIdentChar(src[pos + 7]))) {
+      pushToken(TokenType::ElseIf, "else if");
+      pos += 7;
+      continue;
+    }
+
+    if (src.compare(pos, 6, "switch") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 6 >= src.size() || !isIdentChar(src[pos + 6]))) {
+      pushToken(TokenType::Switch, "switch");
+      pos += 6;
+      continue;
+    }
+
+    if (src.compare(pos, 4, "case") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 4 >= src.size() || !isIdentChar(src[pos + 4]))) {
+      pushToken(TokenType::Case, "case");
+      pos += 4;
+      continue;
+    }
+
+    if (src.compare(pos, 7, "default") == 0 &&
+      (pos == 0 || !isIdentChar(src[pos - 1])) &&
+      (pos + 7 >= src.size() || !isIdentChar(src[pos + 7]))) {
+      pushToken(TokenType::Default, "default");
+      pos += 7;
+      continue;
+    }
+
     if (src.compare(pos, 4, "ctor") == 0 &&
       (pos == 0 || !isIdentChar(src[pos - 1])) &&
       (pos + 4 >= src.size() || !isIdentChar(src[pos + 4]))) {
@@ -257,6 +313,7 @@ if (src.compare(pos, 7, "library") == 0 &&
     if (src.compare(pos, 2, "!=") == 0) { pushToken(TokenType::BangEqual, "!="); pos += 2; continue; }
     if (src.compare(pos, 2, "<=") == 0) { pushToken(TokenType::LessEqual, "<="); pos += 2; continue; }
     if (src.compare(pos, 2, ">=") == 0) { pushToken(TokenType::GreaterEqual, ">="); pos += 2; continue; }
+    if (src.compare(pos, 2, "=>") == 0) { pushToken(TokenType::Arrow, "=>"); pos += 2; continue; }
 
     if (c == '+') { pushToken(TokenType::Plus, "+"); ++pos; continue; }
     if (c == '-') { pushToken(TokenType::Minus, "-"); ++pos; continue; }

@@ -1,9 +1,0 @@
-add library stl
-
-func test() [
-    val x = 5
-]
-
-void.main [
-    test()
-]

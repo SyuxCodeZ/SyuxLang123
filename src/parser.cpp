@@ -25,6 +25,12 @@ bool Parser::check(TokenType type) const {
   return current().type == type;
 }
 
+const Token& Parser::peek(size_t offset) const {
+  size_t p = pos + offset;
+  if (p >= tokens.size()) return tokens.back();
+  return tokens[p];
+}
+
 bool Parser::match(TokenType type) {
   if (check(type)) {
     ++pos;
@@ -67,11 +73,12 @@ std::unique_ptr<StmtNode> Parser::parseStatement() {
   if (check(TokenType::CompOut)) return parseOut();
   if (check(TokenType::CompIn)) return parseIn();
   if (check(TokenType::If)) return parseIf();
+  if (check(TokenType::Switch)) return parseSwitch();
   if (check(TokenType::While)) return parseWhile();
   if (check(TokenType::For)) return parseFor();
   if (check(TokenType::Return)) return parseReturn();
   if (check(TokenType::Identifier)) return parseExpressionStatement();
-  failHere("Expected statement (val, set, obj, comp.out, comp.in, if, while, for, return).");
+  failHere("Expected statement (val, set, obj, comp.out, comp.in, if, switch, while, for, return).");
 }
 
 std::unique_ptr<StmtNode> Parser::parseExpressionStatement() {
@@ -181,14 +188,46 @@ std::unique_ptr<StmtNode> Parser::parseIf() {
   auto thenBlock = parseBlock();
 
   std::unique_ptr<BlockNode> elseBlock;
+
   if (match(TokenType::Else)) {
-    elseBlock = parseBlock();
+    if (check(TokenType::If)) {
+      elseBlock = std::make_unique<BlockNode>();
+      elseBlock->statements.push_back(parseIf());
+    } else {
+      elseBlock = parseBlock();
+    }
   }
 
   auto stmt = std::make_unique<IfNode>();
   stmt->condition = std::move(condition);
   stmt->thenBlock = std::move(thenBlock);
   stmt->elseBlock = std::move(elseBlock);
+  return stmt;
+}
+
+std::unique_ptr<StmtNode> Parser::parseSwitch() {
+  consume(TokenType::Switch, "Expected 'switch'.");
+  consume(TokenType::LParen, "Expected '('.");
+  auto switchExpr = parseExpression();
+  consume(TokenType::RParen, "Expected ')'.");
+  consume(TokenType::LBracket, "Expected '['.");
+  
+  auto stmt = std::make_unique<SwitchNode>();
+  stmt->expr = std::move(switchExpr);
+  stmt->defaultBlock = nullptr;
+  
+  while (!check(TokenType::RBracket) && !check(TokenType::Default)) {
+    stmt->caseValues.push_back(parseExpression());
+    consume(TokenType::Colon, "Expected ':'.");
+    stmt->caseBlocks.push_back(parseBlock());
+  }
+
+  if (match(TokenType::Default)) {
+    consume(TokenType::Colon, "Expected ':'.");
+    stmt->defaultBlock = parseBlock();
+  }
+  
+  consume(TokenType::RBracket, "Expected ']'.");
   return stmt;
 }
 
@@ -353,11 +392,6 @@ std::unique_ptr<ClassNode> Parser::parseClass() {
       field->name = fieldName.text;
       if (match(TokenType::Equal)) {
         field->value = parseExpression();
-      } else {
-        auto expr = std::make_unique<LiteralNode>();
-        expr->kind = LiteralNode::Kind::Int;
-        expr->value = "0";
-        field->value = std::move(expr);
       }
       type->fields.push_back(std::move(field));
       continue;
@@ -484,9 +518,61 @@ std::unique_ptr<ExprNode> Parser::parsePrimary() {
         call->object = std::move(left);
         call->method = prop.text;
         if (!check(TokenType::RParen)) {
-          call->args.push_back(parseExpression());
-          while (match(TokenType::Comma)) {
+          if (check(TokenType::Identifier)) {
+            const Token& firstParam = current();
+            if (peek(1).type == TokenType::Comma || peek(1).type == TokenType::Arrow) {
+              if (peek(1).type == TokenType::Comma) {
+                consume(TokenType::Identifier, "Expected parameter name.");
+                consume(TokenType::Comma, "Expected ',' between parameters.");
+                if (!check(TokenType::Identifier)) failHere("Expected second parameter name.");
+                const Token& param2 = consume(TokenType::Identifier, "Expected second parameter name.");
+                consume(TokenType::Arrow, "Expected '=>'.");
+                auto lambda = std::make_unique<LambdaNode>();
+                lambda->param = firstParam.text + "," + param2.text;
+                lambda->body = parseExpression();
+                call->args.push_back(std::move(lambda));
+              } else {
+                consume(TokenType::Identifier, "Expected parameter name.");
+                consume(TokenType::Arrow, "Expected '=>'.");
+                auto lambda = std::make_unique<LambdaNode>();
+                lambda->param = firstParam.text;
+                lambda->body = parseExpression();
+                call->args.push_back(std::move(lambda));
+              }
+            } else {
+              call->args.push_back(parseExpression());
+            }
+          } else {
             call->args.push_back(parseExpression());
+          }
+          while (match(TokenType::Comma)) {
+            if (check(TokenType::Identifier)) {
+              const Token& firstParam = current();
+              if (peek(1).type == TokenType::Comma || peek(1).type == TokenType::Arrow) {
+                if (peek(1).type == TokenType::Comma) {
+                  consume(TokenType::Identifier, "Expected parameter name.");
+                  consume(TokenType::Comma, "Expected ',' between parameters.");
+                  if (!check(TokenType::Identifier)) failHere("Expected second parameter name.");
+                  const Token& param2 = consume(TokenType::Identifier, "Expected second parameter name.");
+                  consume(TokenType::Arrow, "Expected '=>'.");
+                  auto lambda = std::make_unique<LambdaNode>();
+                  lambda->param = firstParam.text + "," + param2.text;
+                  lambda->body = parseExpression();
+                  call->args.push_back(std::move(lambda));
+                } else {
+                  consume(TokenType::Identifier, "Expected parameter name.");
+                  consume(TokenType::Arrow, "Expected '=>'.");
+                  auto lambda = std::make_unique<LambdaNode>();
+                  lambda->param = firstParam.text;
+                  lambda->body = parseExpression();
+                  call->args.push_back(std::move(lambda));
+                }
+              } else {
+                call->args.push_back(parseExpression());
+              }
+            } else {
+              call->args.push_back(parseExpression());
+            }
           }
         }
         consume(TokenType::RParen, "Expected ')' after method arguments.");

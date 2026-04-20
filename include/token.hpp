@@ -8,6 +8,10 @@ enum class TokenType {
   Obj,
   If,
   Else,
+  ElseIf,
+  Switch,
+  Case,
+  Default,
   While,
   For,
   Func,
@@ -54,6 +58,7 @@ enum class TokenType {
   RParen,
   LBracket,
   RBracket,
+  Arrow,
   End
 };
 

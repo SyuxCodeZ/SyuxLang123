@@ -1,5 +1,0 @@
-val neg = -10
-
-void.main [
-    comp.out neg
-]

@@ -1,3 +1,0 @@
-./scripts/run_syux.ps1 -SourceFile example.syux
-./scripts/run_syux.ps1 -SourceFile calc.syux
-./scripts/run_syux.ps1 -SourceFile calc.syux

@@ -8,6 +8,18 @@ class CodeGen {
   std::ostringstream out;
   std::unordered_map<std::string, std::string> symbolTable;
   int indentLevel = 0;
+  bool needsArrayAlgo = false;
+  bool needsType = false;
+  bool needsRand = false;
+  bool needsTime = false;
+  bool needsRegex = false;
+  bool needsGame = false;
+  bool needsGUI = false;
+  bool needsData = false;
+  bool needsCrypto = false;
+  bool needsSys = false;
+  bool needsThread = false;
+  bool handleArrayAlgo(const std::string& method);
 
   std::string indent() const;
   std::string inferArrayElementType(const ArrayLiteralNode* arr) const;

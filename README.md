@@ -42,21 +42,23 @@ void.main [
 
 ---
 
-## Features (v0.5.0)
+## Features (v0.7.1)
 
 | Feature | Description |
 |---------|-------------|
 | Variables | `val` (immutable) / `set` (mutable) |
 | Types | `int`, `float`, `string`, `bool` (`true/false`, `on/off`) |
-| Arrays | With `.len` property |
+| Arrays | With `.len`, `.first`, `.last`, `.sum`, `.max`, `.min`, `.avg`, `.sort`, `.join`, `.includes` |
+| Array Methods | `.map`, `.filter`, `.reduce` |
 | Loops | `for`, `while`, for-each |
-| Functions | First-class functions |
+| Functions | First-class functions, lambdas |
 | Classes | Constructors (`ctor`), Destructors (`dtor`), **Methods** (`func`) |
 | Method Calls | `object.method(args)` |
 | Property Access | `object.property` |
 | Property Assignment | `set object.property = value` |
 | Increment/Decrement | `i++`, `i--` |
 | Transpilation | Generates C++20 code |
+| Standard Library | `add library stl`, `math`, `rand`, `time`, `file`, `json`, `http`, `regex`, `game`, `gui`, `data`, `crypto`, `sys`, `thread` |
 
 ---
 
@@ -94,6 +96,43 @@ syux transpile program.syux  # Transpile to C++ only
 
 ---
 
+## Standard Library
+
+Use `add library <name>` to include library features:
+
+| Library | Functions |
+|---------|-----------|
+| `stl` | Array methods: `.len`, `.first`, `.last`, `.sum`, `.max`, `.min`, `.avg`, `.map`, `.filter`, `.reduce`, `.sort`, `.join`, `.includes` |
+| `math` | `sqrt`, `abs`, `round`, `pow`, `floor`, `ceil`, `sin`, `cos`, `tan`, `log`, `exp`, etc. |
+| `rand` | `random`, `randInt`, `shuffle` |
+| `time` | `now`, `sleep`, `timestamp` |
+| `file` | `read`, `write`, `append`, `exists` |
+| `json` | `parse`, `stringify` |
+| `http` | `get`, `post` |
+| `regex` | `match`, `replace` |
+| `game` | Game library (Windows) |
+| `gui` | GUI library (Windows/X11) |
+| `data` | `fromCSV`, `median`, `variance`, `stdDev`, `mode` |
+| `crypto` | `md5`, `sha256`, `base64Encode`, `xorEncrypt` |
+| `sys` | `exec`, `getEnv`, `setEnv`, `osInfo`, `cpuCores`, `memAvailable`, `clipboard` |
+| `thread` | `run`, `sleep`, `atomicGet`, `atomicSet` |
+
+### Using Libraries
+
+```syux
+add library crypto
+add library math
+
+void.main [
+    val hash = syxcrypto.md5("hello")
+    val x = math.sqrt(16)
+    comp.out hash
+    comp.out x
+]
+```
+
+---
+
 ## Installation
 
 ## Roadmap
@@ -101,8 +140,9 @@ syux transpile program.syux  # Transpile to C++ only
 | Version | Goal |
 |---------|------|
 | 0.4.0 | Basic features, classes (ctor/dtor) |
-| **0.5.0** | **OOP improvements, methods, property access** |
-| 0.6.0 | Standard Library (STL integration) |
+| 0.5.0 | OOP improvements, methods, property access |
+| 0.6.0 | Standard Library, Arrays STL methods, crypto, data, sys, thread |
+| **0.7.0** | **Version bump for release** |
 | 1.0.0 | Stable release |
 
 ---

@@ -1,4 +1,0 @@
-void.main [
-    val mod = 17 % 5
-    comp.out mod
-]

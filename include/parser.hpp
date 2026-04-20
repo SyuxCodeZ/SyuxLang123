@@ -11,6 +11,7 @@ class Parser {
   size_t pos = 0;
 
   const Token& current() const;
+  const Token& peek(size_t offset) const;
   bool isAtEnd() const;
   bool check(TokenType type) const;
   bool match(TokenType type);
@@ -27,6 +28,7 @@ class Parser {
   std::unique_ptr<StmtNode> parseOut();
   std::unique_ptr<StmtNode> parseIn();
   std::unique_ptr<StmtNode> parseIf();
+  std::unique_ptr<StmtNode> parseSwitch();
   std::unique_ptr<StmtNode> parseWhile();
   std::unique_ptr<StmtNode> parseFor();
   std::unique_ptr<StmtNode> parseForEach();
